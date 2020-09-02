@@ -34,9 +34,10 @@ export function Navbar() {
     else {
         let navbarBreeds: ReactElement[] = [];
         Object.keys(breeds).forEach((u, i) => {
+            
             navbarBreeds.push(
                 <Link to={"/breeds/" + u} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
-                    {u}
+                    {breeds[u].name}
                 </Link>);
         });
 
