@@ -1,24 +1,26 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
+import { Home } from './features/home/Home';
 import { Navbar } from './features/navbar/Navbar';
+import { BreedDetail } from './features/breed-detail/BreedDetail'
+import { Breeds } from './features/breeds/Breeds'
+import { NotFound } from './features/NotFound'
 import './App.scss';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <>
       <Navbar></Navbar>
-      <section className="section">
-        <div className="container">
-          <h1 className="title">
-            Hello World
-          </h1>
-          <p className="subtitle">
-            My first website with <strong>Bulma</strong>!
-          </p>
-          <Counter></Counter>
-          <p>https://age-of-empires-2-api.herokuapp.com/docs/</p>
-        </div>
-      </section>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/breeds" component={Breeds} />
+        <Route path="/breeds/:breed">
+          <BreedDetail></BreedDetail>
+        </Route>
+        <Route path="*" component={NotFound} />
+      </Switch>
     </>
   );
 }

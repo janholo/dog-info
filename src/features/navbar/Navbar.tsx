@@ -1,47 +1,69 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  toggle,
-  selectIsOpen
+    toggle,
+    selectIsOpen
 } from './navbarSlice';
-import { selectUnits, load } from '../units/unitsSlice';
+import { selectBreeds, load } from '../breeds/breedsSlice';
+import { Link } from 'react-router-dom';
 
 export function Navbar() {
     const isOpen = useSelector(selectIsOpen);
-    const units = useSelector(selectUnits);
+    const breeds = useSelector(selectBreeds);
     const dispatch = useDispatch();
+
+    let closeBurgerMenu = () => {
+        if(isOpen) {
+            dispatch(toggle());
+        }
+    }
 
     useEffect(() => {
         dispatch(load());
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []);
-    
-    let navbarUnits = []
-    if(units.length === 0)
-    {
-        navbarUnits.push(
-            <p key="load" className="navbar-item">
-                Loading...
-            </p>);
+
+    let breedsMenuItem;
+    if (Object.keys(breeds).length === 0) {
+        breedsMenuItem = (
+            <Link to="/breeds" className="navbar-item" onClick={() => closeBurgerMenu()}>
+                Breeds
+            </Link>
+        );
     }
-    else
-    {
-        units.forEach((u, i) => {
-              navbarUnits.push(
-                <a key={i} href={"/units/" + u.name} className="navbar-item">
-                    {u.name}
-                </a>);            
+    else {
+        let navbarBreeds: ReactElement[] = [];
+        Object.keys(breeds).forEach((u, i) => {
+            navbarBreeds.push(
+                <Link to={"/breeds/" + u} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
+                    {u}
+                </Link>);
         });
+
+        let breedsDropdown = (
+            <div className="navbar-dropdown">
+                {navbarBreeds}
+            </div>
+        )
+
+        breedsMenuItem = (
+            <div className="navbar-item has-dropdown is-hoverable">
+                <Link to="/breeds" className="navbar-link" onClick={() => closeBurgerMenu()}>
+                    Breeds
+                </Link>
+                {breedsDropdown}
+            </div>
+        );
     }
 
     /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="/">
-                    <img src="/logo.png" alt="AOE2"/>
-                </a>
-            
+                <Link to="/" className="navbar-item" onClick={() => closeBurgerMenu()}>
+                    <img src="/logo.png" alt="Dog" />
+                </Link>
+
                 <a className={`navbar-burger burger ${isOpen ? "is-active" : ""}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => dispatch(toggle())}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -51,14 +73,7 @@ export function Navbar() {
 
             <div id="navbarBasicExample" className={`navbar-menu ${isOpen ? "is-active" : ""}`}>
                 <div className="navbar-start">
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <a className="navbar-link" href="/units">
-                            Units
-                        </a>
-                        <div className="navbar-dropdown">
-                            {navbarUnits}
-                        </div>
-                    </div>
+                    {breedsMenuItem}
                 </div>
             </div>
         </nav>

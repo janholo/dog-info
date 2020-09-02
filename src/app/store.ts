@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import navbarReducer from '../features/navbar/navbarSlice';
-import unitsReducer from '../features/units/unitsSlice';
+import breedsReducer from '../features/breeds/breedsSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     navbar: navbarReducer,
-    units: unitsReducer,
+    breeds: breedsReducer,
   },
 });
 
