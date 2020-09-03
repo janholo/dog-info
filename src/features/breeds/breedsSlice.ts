@@ -5,6 +5,7 @@ export class Breed {
   name: string = "<undefined>";
   images: string[] = [];
   subBreeds: { [id: string]: Breed } = {};
+  dataLoaded: boolean = false;
 }
 
 interface BreedsState {
@@ -28,6 +29,7 @@ export const breedsSlice = createSlice({
           name: displayBreed,
           images: [],
           subBreeds: {},
+          dataLoaded: false
         };
       });
     },
@@ -68,10 +70,24 @@ const asyncForEach = async (
   }
 };
 
-export const loadAdditionalData = (breed: string): AppThunk => async (
+export const loadAdditionalData = (breed?: string): AppThunk => async (
   dispatch,
   getState
 ) => {
+  console.log("load additional data")
+
+  if(breed === undefined)
+  {
+    console.log("breed undefined");
+    return;
+  }
+
+  let { breeds } = getState();
+  if(breeds.breeds[breed.toLowerCase()].dataLoaded) {
+    console.log("breed already loaded");
+    return;
+  }
+
   let updateSubBreeds = (sb: { [id: string]: Breed }) => {
     let { breeds } = getState();
   
@@ -80,7 +96,7 @@ export const loadAdditionalData = (breed: string): AppThunk => async (
       console.warn("Somehow this breed is not in the list. abort!")
       return
     }
-    let modifiedBreed = {...oldBreed, subBreeds: sb }
+    let modifiedBreed = {...oldBreed, subBreeds: sb, dataLoaded: true }
     dispatch(updateBreed(modifiedBreed));
   }
 
@@ -97,6 +113,7 @@ export const loadAdditionalData = (breed: string): AppThunk => async (
       name: displayBreed,
       images: [],
       subBreeds: {},
+      dataLoaded: false
     };
   });
 
@@ -118,6 +135,7 @@ export const loadAdditionalData = (breed: string): AppThunk => async (
       name: displayBreed,
       images: subData,
       subBreeds: {},
+      dataLoaded: false
     };
   });
 

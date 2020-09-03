@@ -13,7 +13,7 @@ export function Navbar() {
     const dispatch = useDispatch();
 
     let closeBurgerMenu = () => {
-        if(isOpen) {
+        if (isOpen) {
             dispatch(toggle());
         }
     }
@@ -34,7 +34,7 @@ export function Navbar() {
     else {
         let navbarBreeds: ReactElement[] = [];
         Object.keys(breeds).forEach((u, i) => {
-            
+
             navbarBreeds.push(
                 <Link to={"/breeds/" + u} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
                     {breeds[u].name}
@@ -75,6 +75,21 @@ export function Navbar() {
             <div id="navbarBasicExample" className={`navbar-menu ${isOpen ? "is-active" : ""}`}>
                 <div className="navbar-start">
                     {breedsMenuItem}
+                </div>
+                <div className="navbar-end">
+                    <div className="navbar-item has-dropdown is-hoverable">
+                        <p className="navbar-link">
+                            English
+                        </p>
+                        <div className="navbar-dropdown">
+                            <Link to="/en" key={1} className="navbar-item" onClick={() => closeBurgerMenu()}>
+                                English
+                            </Link>
+                            <Link to="/de" key={2} className="navbar-item" onClick={() => closeBurgerMenu()}>
+                                Deutsch
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

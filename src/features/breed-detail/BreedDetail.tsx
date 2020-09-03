@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useRouteMatch, Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAdditionalData, selectBreeds, Breed } from '../breeds/breedsSlice';
+import { ModalImage } from '../modal-image/ModalImage'
 
 export function BreedDetail() {
     let { breed, subbreed } = useParams();
+    let { path, url } = useRouteMatch();
 
     let breedName: string = breed;
     let subBreedName: string = subbreed;
@@ -13,12 +15,17 @@ export function BreedDetail() {
     const breeds = useSelector(selectBreeds);
     const breedObject = getBreedObject(breeds, breedName, subBreedName);
 
+    const [page, setPage] = useState(0);
+
     useEffect(() => {
-        dispatch(loadAdditionalData(breedName));
+        setPage(0);
+        if (subBreedName !== undefined) {
+            // skip sub breeds
+            return
+        }
+        dispatch(loadAdditionalData(breedObject?.name));
         // eslint-disable-next-line
     }, [breed, subbreed]);
-
-    const [page, setPage] = useState(0);
 
     if (breedObject === undefined) {
         return (
@@ -38,9 +45,9 @@ export function BreedDetail() {
     let breedImages = pageImages.map((u, i) => {
         return (
             <div className="column is-3" key={i}>
-                <div className="box">
+                <Link to={`${url}/image/${i + page * imagesPerPage}`} className="box">
                     <img src={u} alt={breedObject.name}></img>
-                </div>
+                </Link>
             </div>);
     });
 
@@ -121,7 +128,7 @@ export function BreedDetail() {
             {subBreedBoxes.length !== 0 &&
                 <div className="section">
                     <div className="container">
-                        <h2 className="title is-4">Sub breeds</h2>
+                        <h2 className="title is-4">Sub-breeds</h2>
                         <div className="columns is-multiline">
                             {subBreedBoxes}
                         </div>
@@ -138,6 +145,9 @@ export function BreedDetail() {
                     {pagination}
                 </div>
             </div>
+            <Switch>
+                <Route path={`${path}/image/:imageNumber`} render={() => <ModalImage breed={breed} subBreed={subbreed} maxImageCount={breedObject.images.length} />} />
+            </Switch>
         </>
     )
 }
