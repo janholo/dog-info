@@ -25,13 +25,10 @@ function App() {
     <>
       <Navbar></Navbar>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
+        <Route exact path="/" component={Home} />
         <Route exact path="/breeds" component={Breeds} />
-        <Route path="/breeds/:breed">
-          <BreedDetail></BreedDetail>
-        </Route>
+        <Route path="/breeds/:breed" component={BreedDetail} />
+        <Route path="/subbreeds/:breed/:subbreed" component={BreedDetail} />
         <Route path="*" component={NotFound} />
       </Switch>
     </>

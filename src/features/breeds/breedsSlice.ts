@@ -72,6 +72,18 @@ export const loadAdditionalData = (breed: string): AppThunk => async (
   dispatch,
   getState
 ) => {
+  let updateSubBreeds = (sb: { [id: string]: Breed }) => {
+    let { breeds } = getState();
+  
+    let oldBreed = breeds.breeds[breed.toLowerCase()];
+    if(oldBreed === undefined) {
+      console.warn("Somehow this breed is not in the list. abort!")
+      return
+    }
+    let modifiedBreed = {...oldBreed, subBreeds: sb }
+    dispatch(updateBreed(modifiedBreed));
+  }
+
   let response = await fetch(`/api/breed/${breed.toLowerCase()}/list`);
 
   let json = await response.json();
@@ -79,15 +91,29 @@ export const loadAdditionalData = (breed: string): AppThunk => async (
 
   let subBreeds: { [id: string]: Breed } = {};
 
-  await asyncForEach(data, async (subBreed) => {
+  data.forEach(subBreed => {
     let displayBreed = subBreed.charAt(0).toUpperCase() + subBreed.slice(1);
+    subBreeds[subBreed.toLowerCase()] = {
+      name: displayBreed,
+      images: [],
+      subBreeds: {},
+    };
+  });
+
+  updateSubBreeds(subBreeds);
+
+  // Get all images and update breed again
+  subBreeds = {};
+
+  await asyncForEach(data, async (subBreed) => {
     let subResponse = await fetch(
       `/api/breed/${breed.toLowerCase()}/${subBreed.toLowerCase()}/images`
     );
 
     let subJson = await subResponse.json();
     let subData: string[] = subJson.message;
-
+    
+    let displayBreed = subBreed.charAt(0).toUpperCase() + subBreed.slice(1);
     subBreeds[subBreed.toLowerCase()] = {
       name: displayBreed,
       images: subData,
@@ -95,17 +121,7 @@ export const loadAdditionalData = (breed: string): AppThunk => async (
     };
   });
 
-  let { breeds } = getState();
-
-  let oldBreed = breeds.breeds[breed.toLowerCase()];
-  if(oldBreed === undefined) {
-    console.warn("Somehow this breed is not in the list. abort!")
-    return
-  }
-  let modifiedBreed = {...oldBreed, subBreeds }
-  
-
-  dispatch(updateBreed(modifiedBreed));
+  updateSubBreeds(subBreeds);
 };
 
 export const selectBreeds = (state: RootState) => state.breeds.breeds;
