@@ -6,6 +6,8 @@ import {
 } from './navbarSlice';
 import { selectBreeds, load } from '../breeds/breedsSlice';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import LocalisedLink from '../LocalisedLink'
 
 export function Navbar() {
     const isOpen = useSelector(selectIsOpen);
@@ -27,7 +29,10 @@ export function Navbar() {
     if (Object.keys(breeds).length === 0) {
         breedsMenuItem = (
             <Link to="/breeds" className="navbar-item" onClick={() => closeBurgerMenu()}>
-                Breeds
+                <FormattedMessage
+                    id="breeds"
+                    defaultMessage="Breeds"
+                />
             </Link>
         );
     }
@@ -50,7 +55,10 @@ export function Navbar() {
         breedsMenuItem = (
             <div className="navbar-item has-dropdown is-hoverable">
                 <Link to="/breeds" className="navbar-link" onClick={() => closeBurgerMenu()}>
-                    Breeds
+                    <FormattedMessage
+                        id="breeds"
+                        defaultMessage="Breeds"
+                    />
                 </Link>
                 {breedsDropdown}
             </div>
@@ -61,9 +69,9 @@ export function Navbar() {
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <Link to="/" className="navbar-item" onClick={() => closeBurgerMenu()}>
+                <LocalisedLink to="/" className="navbar-item" onClick={() => closeBurgerMenu()}>
                     <img src="/logo.png" alt="Dog" />
-                </Link>
+                </LocalisedLink>
 
                 <a className={`navbar-burger burger ${isOpen ? "is-active" : ""}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => dispatch(toggle())}>
                     <span aria-hidden="true"></span>

@@ -5,11 +5,12 @@ import { BreedDetail } from './features/breed-detail/BreedDetail'
 import { Breeds } from './features/breeds/Breeds'
 import { NotFound } from './features/NotFound'
 import './App.scss';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
 function App() {
   const { listen } = useHistory();
+  let { path } = useRouteMatch();
 
   useEffect(
     () =>
@@ -25,10 +26,10 @@ function App() {
     <>
       <Navbar></Navbar>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/breeds" component={Breeds} />
-        <Route path="/breeds/:breed" component={BreedDetail} />
-        <Route path="/subbreeds/:breed/:subbreed" component={BreedDetail} />
+        <Route exact path={`${path}/`} component={Home} />
+        <Route exact path={`${path}/breeds`} component={Breeds} />
+        <Route path={`${path}/breeds/:breed`} component={BreedDetail} />
+        <Route path={`${path}/subbreeds/:breed/:subbreed`} component={BreedDetail} />
         <Route path="*" component={NotFound} />
       </Switch>
     </>
