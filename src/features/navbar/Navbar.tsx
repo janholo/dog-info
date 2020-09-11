@@ -6,13 +6,15 @@ import {
 } from './navbarSlice';
 import { selectBreeds, load } from '../breeds/breedsSlice';
 import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import LocalisedLink from '../LocalisedLink'
+import { LocalisationData } from '../localisation/Localisation'
 
 export function Navbar() {
     const isOpen = useSelector(selectIsOpen);
     const breeds = useSelector(selectBreeds);
     const dispatch = useDispatch();
+    const intlData = useIntl();
 
     let closeBurgerMenu = () => {
         if (isOpen) {
@@ -28,12 +30,12 @@ export function Navbar() {
     let breedsMenuItem;
     if (Object.keys(breeds).length === 0) {
         breedsMenuItem = (
-            <Link to="/breeds" className="navbar-item" onClick={() => closeBurgerMenu()}>
+            <LocalisedLink to="/breeds" className="navbar-item" onClick={() => closeBurgerMenu()}>
                 <FormattedMessage
                     id="breeds"
                     defaultMessage="Breeds"
                 />
-            </Link>
+            </LocalisedLink>
         );
     }
     else {
@@ -41,9 +43,9 @@ export function Navbar() {
         Object.keys(breeds).forEach((u, i) => {
 
             navbarBreeds.push(
-                <Link to={"/breeds/" + u} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
+                <LocalisedLink to={"/breeds/" + u} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
                     {breeds[u].name}
-                </Link>);
+                </LocalisedLink>);
         });
 
         let breedsDropdown = (
@@ -54,12 +56,12 @@ export function Navbar() {
 
         breedsMenuItem = (
             <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/breeds" className="navbar-link" onClick={() => closeBurgerMenu()}>
+                <LocalisedLink to="/breeds" className="navbar-link" onClick={() => closeBurgerMenu()}>
                     <FormattedMessage
                         id="breeds"
                         defaultMessage="Breeds"
                     />
-                </Link>
+                </LocalisedLink>
                 {breedsDropdown}
             </div>
         );
@@ -70,7 +72,7 @@ export function Navbar() {
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <LocalisedLink to="/" className="navbar-item" onClick={() => closeBurgerMenu()}>
-                    <img src="/logo.png" alt="Dog" />
+                    <span role="img" aria-label="dog" className="is-size-4">🐕</span>
                 </LocalisedLink>
 
                 <a className={`navbar-burger burger ${isOpen ? "is-active" : ""}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => dispatch(toggle())}>
@@ -87,15 +89,26 @@ export function Navbar() {
                 <div className="navbar-end">
                     <div className="navbar-item has-dropdown is-hoverable">
                         <p className="navbar-link">
-                            English
+                            {LocalisationData[intlData.locale].displayText}
                         </p>
                         <div className="navbar-dropdown">
-                            <Link to="/en" key={1} className="navbar-item" onClick={() => closeBurgerMenu()}>
-                                English
-                            </Link>
-                            <Link to="/de" key={2} className="navbar-item" onClick={() => closeBurgerMenu()}>
-                                Deutsch
-                            </Link>
+                            {Object.keys(LocalisationData).map((locale, i) => {
+                                // replace locale (javascript replace only replaces first occurence)
+                                let switchLangUrl = window.location.pathname.replace(`/${intlData.locale}`, `/${locale}`);
+                                if(locale !== intlData.locale) {
+                                    return (
+                                        <Link to={switchLangUrl} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
+                                            {LocalisationData[locale].displayText}
+                                        </Link>
+                                    )
+                                } else {
+                                    return (
+                                        <div key={i} className="navbar-item has-text-weight-bold has-text-link">
+                                            {LocalisationData[locale].displayText}
+                                        </div>
+                                    )
+                                }
+                            })}
                         </div>
                     </div>
                 </div>

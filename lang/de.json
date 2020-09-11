@@ -1,0 +1,11 @@
+{
+  "breeds": {
+    "defaultMessage": "Rassen"
+  },
+  "info": {
+    "defaultMessage": "Informationen zu Hunden"
+  },
+  "info-sub": {
+    "defaultMessage": "Eine einfache Seite welche auf der <a>Hunde Api</a> aufbaut"
+  }
+}

@@ -2,33 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './index.scss';
-import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl'
 import { NotFound } from './features/NotFound';
-
-const messagesInGerman = {
-  breeds: "Rassen",
-}
-
-interface ILocalisedAppProps {
-  locale: string
-}
-
-function LocalisedApp(props: ILocalisedAppProps) {
-  let messages = undefined;
-  
-  if(props.locale === "de") {
-    messages = messagesInGerman;
-  }
-
-  return (
-    <IntlProvider messages={messages} locale={props.locale} defaultLocale="en">
-      <App/>
-    </IntlProvider>
-  );
-}
+import { LocalisedApp } from './features/localisation/Localisation'
 
 ReactDOM.render(
   <React.StrictMode>

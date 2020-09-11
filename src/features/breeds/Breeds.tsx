@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectBreeds } from '../breeds/breedsSlice';
-import { Link } from 'react-router-dom';
+import LocalisedLink from '../LocalisedLink';
 
 export function Breeds() {
     const breeds = useSelector(selectBreeds);
@@ -14,7 +14,7 @@ export function Breeds() {
         let breed = breeds[u];
         return (
             <div className="column is-4" key={i}>
-                <Link to={"/breeds/" + u} className="box" style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+                <LocalisedLink to={"/breeds/" + u} className="box" style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
                     <h2 className="is-size-5">
                         {breed.name}
                     </h2>
@@ -23,7 +23,7 @@ export function Breeds() {
                             <img src={breed.images[0]} alt={breed.name} className="is-rounded" style={{ objectFit: "cover", width: 128, height: 128 }}></img>
                         </figure>
                     )}
-                </Link>
+                </LocalisedLink>
             </div>);
     });
 

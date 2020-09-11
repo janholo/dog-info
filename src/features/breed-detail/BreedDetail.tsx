@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link, useRouteMatch, Switch, Route } from 'react-router-dom'
+import { useParams, useRouteMatch, Switch, Route, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAdditionalData, selectBreeds, Breed } from '../breeds/breedsSlice';
 import { ModalImage } from '../modal-image/ModalImage'
+import LocalisedLink from '../LocalisedLink';
 
 export function BreedDetail() {
     let { breed, subbreed } = useParams();
@@ -98,7 +99,7 @@ export function BreedDetail() {
         let subBreed = breedObject.subBreeds[u];
         return (
             <div className="column is-4" key={i}>
-                <Link to={`/subbreeds/${breedObject.name.toLowerCase()}/${subBreed.name.toLowerCase()}`} className="box" style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+                <LocalisedLink to={`/subbreeds/${breedObject.name.toLowerCase()}/${subBreed.name.toLowerCase()}`} className="box" style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
                     <h2 className="is-size-5">
                         {subBreed.name}
                     </h2>
@@ -107,7 +108,7 @@ export function BreedDetail() {
                             <img src={subBreed.images[0]} alt={subBreed.name} className="is-rounded" style={{ objectFit: "cover", width: 128, height: 128 }}></img>
                         </figure>
                     )}
-                </Link>
+                </LocalisedLink>
             </div>);
     });
 
@@ -120,7 +121,7 @@ export function BreedDetail() {
                     {subBreedName !== undefined &&
                         <p className="subtitle">
                             Is a sub-breed of
-                            <Link to={`/breeds/${breedName.toLowerCase()}`}>{" " + breeds[breedName].name}</Link>
+                            <LocalisedLink to={`/breeds/${breedName.toLowerCase()}`}>{" " + breeds[breedName].name}</LocalisedLink>
                         </p>
                     }
                 </div>

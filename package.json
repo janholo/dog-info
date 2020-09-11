@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.3",
     "bulma": "^0.9.0",
     "bulmaswatch": "^0.8.1",
     "node-sass": "^4.14.1",
@@ -23,6 +24,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "styled-components": "^5.2.0",
     "typescript": "^3.8.3"
   },
   "scripts": {
@@ -31,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "extract": "formatjs extract src/**/*.ts* --out-file lang/en.json",
-    "compile": "formatjs compile lang/en.json --ast --out-file compiled-lang/en.json"
+    "compile": "formatjs compile lang/de.json --ast --out-file public/compiled-lang/de.json"
   },
   "proxy": "https://dog.ceo",
   "eslintConfig": {

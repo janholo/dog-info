@@ -3,7 +3,6 @@ import { useParams, useRouteMatch, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectBreeds } from '../breeds/breedsSlice';
 
-
 type ModalImageProps = {
     breed: string,
     subBreed: string | undefined
