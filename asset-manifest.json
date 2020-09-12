@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.c9d2f3cb.chunk.css",
-    "main.js": "/static/js/main.cecf5488.chunk.js",
-    "main.js.map": "/static/js/main.cecf5488.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.ef44cdbe.js",
-    "runtime-main.js.map": "/static/js/runtime-main.ef44cdbe.js.map",
-    "static/js/2.e39bd467.chunk.js": "/static/js/2.e39bd467.chunk.js",
-    "static/js/2.e39bd467.chunk.js.map": "/static/js/2.e39bd467.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.7dd3b081b776bb1ab5e5c6bbcbe0e645.js": "/precache-manifest.7dd3b081b776bb1ab5e5c6bbcbe0e645.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.c9d2f3cb.chunk.css.map": "/static/css/main.c9d2f3cb.chunk.css.map",
-    "static/js/2.e39bd467.chunk.js.LICENSE.txt": "/static/js/2.e39bd467.chunk.js.LICENSE.txt"
+    "main.css": "/dog-info/static/css/main.c9d2f3cb.chunk.css",
+    "main.js": "/dog-info/static/js/main.cecf5488.chunk.js",
+    "main.js.map": "/dog-info/static/js/main.cecf5488.chunk.js.map",
+    "runtime-main.js": "/dog-info/static/js/runtime-main.d5670d03.js",
+    "runtime-main.js.map": "/dog-info/static/js/runtime-main.d5670d03.js.map",
+    "static/js/2.e05997f4.chunk.js": "/dog-info/static/js/2.e05997f4.chunk.js",
+    "static/js/2.e05997f4.chunk.js.map": "/dog-info/static/js/2.e05997f4.chunk.js.map",
+    "index.html": "/dog-info/index.html",
+    "precache-manifest.179b4ac78548b8db2f90ba0cf00c7a79.js": "/dog-info/precache-manifest.179b4ac78548b8db2f90ba0cf00c7a79.js",
+    "service-worker.js": "/dog-info/service-worker.js",
+    "static/css/main.c9d2f3cb.chunk.css.map": "/dog-info/static/css/main.c9d2f3cb.chunk.css.map",
+    "static/js/2.e05997f4.chunk.js.LICENSE.txt": "/dog-info/static/js/2.e05997f4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ef44cdbe.js",
-    "static/js/2.e39bd467.chunk.js",
+    "static/js/runtime-main.d5670d03.js",
+    "static/js/2.e05997f4.chunk.js",
     "static/css/main.c9d2f3cb.chunk.css",
     "static/js/main.cecf5488.chunk.js"
   ]
