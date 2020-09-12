@@ -1,0 +1,100 @@
+{
+  "breeds": [
+    {
+      "type": 0,
+      "value": "Rassen"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Fehler!"
+    }
+  ],
+  "images": [
+    {
+      "type": 0,
+      "value": "Bilder"
+    }
+  ],
+  "info": [
+    {
+      "type": 0,
+      "value": "Informationen zu Hunden"
+    }
+  ],
+  "info-sub": [
+    {
+      "type": 0,
+      "value": "Eine einfache Seite welche auf der "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Hunde Api"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " aufbaut"
+    }
+  ],
+  "loading": [
+    {
+      "type": 0,
+      "value": "Lädt..."
+    }
+  ],
+  "next": [
+    {
+      "type": 0,
+      "value": "Nächste Seite"
+    }
+  ],
+  "not-found-text": [
+    {
+      "type": 0,
+      "value": "Diese Seite existiert nicht."
+    }
+  ],
+  "not-found-title": [
+    {
+      "type": 0,
+      "value": "Nicht gefunden!"
+    }
+  ],
+  "previous": [
+    {
+      "type": 0,
+      "value": "Vorherige Seite"
+    }
+  ],
+  "select-breed": [
+    {
+      "type": 0,
+      "value": "Wählen Sie ein Rasse aus um mehr Inforamtionen zu erhalten."
+    }
+  ],
+  "sub-breed-link": [
+    {
+      "type": 0,
+      "value": "Eine Unterrasse von "
+    },
+    {
+      "children": [
+      ],
+      "type": 8,
+      "value": "a"
+    }
+  ],
+  "sub-breeds": [
+    {
+      "type": 0,
+      "value": "Unterrasse"
+    }
+  ]
+}
