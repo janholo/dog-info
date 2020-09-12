@@ -59,7 +59,7 @@ export function ModalImage(props: ModalImageProps) {
                 <button className="modal-close is-large" aria-label="close"></button>
             </Link>
             {imageNumberNumber > 0 &&
-                <div style={{ position: "fixed", left: 50, top: "50%" }}>
+                <div style={{ position: "fixed", left: "5vw", top: "90%" }}>
                     <Link to={previousImage}>
                         <button className="button is-link">
                             &#060;
@@ -68,7 +68,7 @@ export function ModalImage(props: ModalImageProps) {
                 </div>
             }
             {imageNumberNumber < (props.maxImageCount - 1) &&
-                <div style={{ position: "fixed", right: 50, top: "50%" }}>
+                <div style={{ position: "fixed", right: "5vw", top: "90%" }}>
                     <Link to={nextImage}>
                         <button className="button is-link">
                             &#062;

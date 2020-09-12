@@ -53,7 +53,7 @@ export function BreedDetail() {
         return (
             <div className="column is-3" key={i}>
                 <Link to={`${url}/image/${i + page * imagesPerPage}`} className="box">
-                    <img src={u} alt={breedObject.name}></img>
+                    <img src={u} alt={breedObject.name} style={{display: "block", margin: "0 auto"}}></img>
                 </Link>
             </div>);
     });
