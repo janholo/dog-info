@@ -3,6 +3,8 @@ import App from '../../App';
 import { IntlProvider } from 'react-intl'
 import { MessageFormatElement } from 'intl-messageformat-parser/src/types'
 import Spinner from '../Spinner';
+import { useDispatch } from 'react-redux';
+import { Severity, addToastWithDismiss } from '../toast/toastSlice';
 
 export class Locale {
     displayText: string = "";
@@ -26,25 +28,27 @@ enum State {
 export function LocalisedApp(props: ILocalisedAppProps) {
     let [messages, setMessages] = useState<{messages: Record<string, string> | Record<string, MessageFormatElement[]> | undefined, state: State, locale: string}>({messages: undefined, state: State.Loading, locale: "en"});
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         // locale changed, load messages
         if(props.locale !== "en") {
             setMessages({messages: undefined, state: State.Loading, locale: props.locale});
 
-            fetch(`/compiled-lang/${props.locale}2.json`)
+            fetch(`/compiled-lang/${props.locale}.json`)
                 .then(r => r.json())
                 .then(json => {
                     setMessages({messages: json, state: State.Ok, locale: props.locale});
                 })
                 .catch(() => {
                     setMessages({messages: undefined, state: State.Ok, locale: "en"});
-                    //addToast("Failed to load language data - Please reload this page");
+                    dispatch(addToastWithDismiss("Failed to load language data - Page is displayed in english as fallback", Severity.Error));
                 });    
         }
         else {
             setMessages({messages: undefined, state: State.Ok, locale: props.locale});
         }
-    }, [props.locale]);
+    }, [props.locale, dispatch]);
 
 
     if(messages.state === State.Loading) {

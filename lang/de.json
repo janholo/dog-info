@@ -2,10 +2,40 @@
   "breeds": {
     "defaultMessage": "Rassen"
   },
+  "error": {
+    "defaultMessage": "Fehler!"
+  },
+  "images": {
+    "defaultMessage": "Bilder"
+  },
   "info": {
     "defaultMessage": "Informationen zu Hunden"
   },
   "info-sub": {
     "defaultMessage": "Eine einfache Seite welche auf der <a>Hunde Api</a> aufbaut"
+  },
+  "loading": {
+    "defaultMessage": "Lädt..."
+  },
+  "next": {
+    "defaultMessage": "Nächste Seite"
+  },
+  "not-found-text": {
+    "defaultMessage": "Diese Seite existiert nicht."
+  },
+  "not-found-title": {
+    "defaultMessage": "Nicht gefunden!"
+  },
+  "previous": {
+    "defaultMessage": "Vorherige Seite"
+  },
+  "select-breed": {
+    "defaultMessage": "Wählen Sie ein Rasse aus um mehr Inforamtionen zu erhalten."
+  },
+  "sub-breed-link": {
+    "defaultMessage": "Eine Unterrasse von <a></a>."
+  },
+  "sub-breeds": {
+    "defaultMessage": "Unterrasse"
   }
 }

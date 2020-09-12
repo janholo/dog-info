@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 interface INotFoundProps {
     error: string
@@ -9,7 +10,10 @@ export default function Error(props: INotFoundProps) {
         <section className="section">
             <div className="container notification is-danger">
                 <h1 className="title">
-                    Error!
+                    <FormattedMessage
+                        id="error"
+                        defaultMessage="Error!"
+                    />
                 </h1>
                 <p className="subtitle">
                     {props.error}

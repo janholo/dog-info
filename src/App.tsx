@@ -4,6 +4,7 @@ import { Navbar } from './features/navbar/Navbar';
 import { BreedDetail } from './features/breed-detail/BreedDetail'
 import { Breeds } from './features/breeds/Breeds'
 import { NotFound } from './features/NotFound'
+import Toasts from './features/toast/Toasts'
 import './App.scss';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <Navbar></Navbar>
+      <Toasts></Toasts>
       <Switch>
         <Route exact path={`${path}/`} component={Home} />
         <Route exact path={`${path}/breeds`} component={Breeds} />

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadAdditionalData, selectBreeds, Breed } from '../breeds/breedsSlice';
 import { ModalImage } from '../modal-image/ModalImage'
 import LocalisedLink from '../LocalisedLink';
+import { FormattedMessage } from 'react-intl';
 
 export function BreedDetail() {
     let { breed, subbreed } = useParams();
@@ -32,7 +33,12 @@ export function BreedDetail() {
         return (
             <div className="section">
                 <div className="container">
-                    <h1 className="title">Loading...</h1>
+                    <h1 className="title">
+                        <FormattedMessage
+                            id="loading"
+                            defaultMessage="Loading..."
+                        />
+                    </h1>
                 </div>
             </div>
         )
@@ -55,8 +61,18 @@ export function BreedDetail() {
     let pagination =
         (
             <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-                <button className="pagination-previous" disabled={page <= 0} onClick={() => setPage(page - 1)}>Previous</button>
-                <button className="pagination-next" disabled={page >= maxPage} onClick={() => setPage(page + 1)}>Next page</button>
+                <button className="pagination-previous" disabled={page <= 0} onClick={() => setPage(page - 1)}>
+                    <FormattedMessage
+                        id="previous"
+                        defaultMessage="Previous"
+                    />
+                </button>
+                <button className="pagination-next" disabled={page >= maxPage} onClick={() => setPage(page + 1)}>
+                    <FormattedMessage
+                        id="next"
+                        defaultMessage="Next"
+                    />
+                </button>
                 <ul className="pagination-list">
                     {page > 1 &&
                         <li>
@@ -120,8 +136,13 @@ export function BreedDetail() {
                     <h1 className="title is-3">{breedObject.name}</h1>
                     {subBreedName !== undefined &&
                         <p className="subtitle">
-                            Is a sub-breed of
-                            <LocalisedLink to={`/breeds/${breedName.toLowerCase()}`}>{" " + breeds[breedName].name}</LocalisedLink>
+                            <FormattedMessage
+                                id="sub-breed-link"
+                                defaultMessage="Is a sub-breed of <a></a>"
+                                values={{
+                                    a: () => <LocalisedLink to={`/breeds/${breedName.toLowerCase()}`}>{" " + breeds[breedName].name}</LocalisedLink>,
+                                }}
+                            />
                         </p>
                     }
                 </div>
@@ -129,7 +150,12 @@ export function BreedDetail() {
             {subBreedBoxes.length !== 0 &&
                 <div className="section">
                     <div className="container">
-                        <h2 className="title is-4">Sub-breeds</h2>
+                        <h2 className="title is-4">
+                            <FormattedMessage
+                                id="sub-breeds"
+                                defaultMessage="Sub-breeds"
+                            />
+                        </h2>
                         <div className="columns is-multiline">
                             {subBreedBoxes}
                         </div>
@@ -138,7 +164,12 @@ export function BreedDetail() {
             }
             <div className="section">
                 <div className="container">
-                    <h2 className="title is-4">Images</h2>
+                    <h2 className="title is-4">
+                        <FormattedMessage
+                            id="images"
+                            defaultMessage="Images"
+                        />
+                    </h2>
                     {pagination}
                     <div className="columns is-multiline">
                         {breedImages}

@@ -7,7 +7,7 @@ import {
 import { selectBreeds, load } from '../breeds/breedsSlice';
 import { Link } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import LocalisedLink from '../LocalisedLink'
+import LocalisedLink, { LocalisedNavLink } from '../LocalisedLink'
 import { LocalisationData } from '../localisation/Localisation'
 
 export function Navbar() {
@@ -43,9 +43,9 @@ export function Navbar() {
         Object.keys(breeds).forEach((u, i) => {
 
             navbarBreeds.push(
-                <LocalisedLink to={"/breeds/" + u} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>
+                <LocalisedNavLink to={"/breeds/" + u} key={i} className="navbar-item" activeClassName="is-active" onClick={() => closeBurgerMenu()}>
                     {breeds[u].name}
-                </LocalisedLink>);
+                </LocalisedNavLink>);
         });
 
         let breedsDropdown = (

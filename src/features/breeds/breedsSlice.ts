@@ -74,17 +74,14 @@ export const loadAdditionalData = (breed?: string): AppThunk => async (
   dispatch,
   getState
 ) => {
-  console.log("load additional data")
-
   if(breed === undefined)
   {
-    console.log("breed undefined");
+    console.warn("breed undefined");
     return;
   }
 
   let { breeds } = getState();
   if(breeds.breeds[breed.toLowerCase()].dataLoaded) {
-    console.log("breed already loaded");
     return;
   }
 

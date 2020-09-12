@@ -1,13 +1,14 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, ThunkAction, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
 import navbarReducer from '../features/navbar/navbarSlice';
 import breedsReducer from '../features/breeds/breedsSlice';
+import toastReducer from '../features/toast/toastSlice';
 
 export const store = configureStore({
+  middleware: getDefaultMiddleware({immutableCheck: {warnAfter: 100}}),
   reducer: {
-    counter: counterReducer,
     navbar: navbarReducer,
     breeds: breedsReducer,
+    toast: toastReducer
   },
 });
 

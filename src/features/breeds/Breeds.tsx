@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectBreeds } from '../breeds/breedsSlice';
 import LocalisedLink from '../LocalisedLink';
+import { FormattedMessage } from 'react-intl';
 
 export function Breeds() {
     const breeds = useSelector(selectBreeds);
@@ -32,11 +33,15 @@ export function Breeds() {
             <section className="section">
                 <div className="container">
                     <h1 className="title">
-                        Breeds
-                </h1>
+                        <FormattedMessage
+                            id="breeds"
+                            defaultMessage="Breeds" />
+                    </h1>
                     <p className="subtitle">
-                        Select a breed to show more information
-                </p>
+                        <FormattedMessage
+                            id="select-breed"
+                            defaultMessage="Select a breed to show more information" />
+                    </p>
                 </div>
             </section>
             <section className="section">
@@ -55,10 +60,16 @@ function NoBreedsFound() {
         <section className="section">
             <div className="container">
                 <h1 className="title">
-                    Breeds
+                    <FormattedMessage
+                        id="breeds"
+                        defaultMessage="Breeds"
+                    />
                 </h1>
                 <p className="subtitle">
-                    Loading...
+                    <FormattedMessage
+                        id="loading"
+                        defaultMessage="Loading..."
+                    />
                 </p>
             </div>
         </section>
