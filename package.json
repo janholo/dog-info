@@ -35,7 +35,6 @@
     "extract": "formatjs extract src/**/*.ts* --out-file lang/en.json",
     "compile": "formatjs compile lang/de.json --ast --out-file public/compiled-lang/de.json"
   },
-  "proxy": "https://dog.ceo",
   "eslintConfig": {
     "extends": "react-app"
   },

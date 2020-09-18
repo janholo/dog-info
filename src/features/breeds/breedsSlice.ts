@@ -42,7 +42,7 @@ export const breedsSlice = createSlice({
 export const { setBreeds, updateBreed } = breedsSlice.actions;
 
 export const load = (): AppThunk => async (dispatch, getState) => {
-  let response = await fetch(`/api/breeds/list/random/5`);
+  let response = await fetch(`https://dog.ceo/api/breeds/list/random/5`);
 
   let json = await response.json();
   let data: string[] = json.message;
@@ -53,7 +53,7 @@ export const load = (): AppThunk => async (dispatch, getState) => {
 
   // Go over all breeds and get images
   for (let breed of Object.values(breeds.breeds)) {
-    let imgResponse = await fetch(`/api/breed/${breed.name.toLowerCase()}/images`);
+    let imgResponse = await fetch(`https://dog.ceo/api/breed/${breed.name.toLowerCase()}/images`);
     let imgJson = await imgResponse.json();
     let images: string[] = imgJson.message;
     let updatedBreed = { ...breed, images: images };
@@ -97,7 +97,7 @@ export const loadAdditionalData = (breed?: string): AppThunk => async (
     dispatch(updateBreed(modifiedBreed));
   }
 
-  let response = await fetch(`/api/breed/${breed.toLowerCase()}/list`);
+  let response = await fetch(`https://dog.ceo/api/breed/${breed.toLowerCase()}/list`);
 
   let json = await response.json();
   let data: string[] = json.message;
@@ -121,7 +121,7 @@ export const loadAdditionalData = (breed?: string): AppThunk => async (
 
   await asyncForEach(data, async (subBreed) => {
     let subResponse = await fetch(
-      `/api/breed/${breed.toLowerCase()}/${subBreed.toLowerCase()}/images`
+      `https://dog.ceo/api/breed/${breed.toLowerCase()}/${subBreed.toLowerCase()}/images`
     );
 
     let subJson = await subResponse.json();
