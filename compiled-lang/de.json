@@ -89,12 +89,22 @@
       ],
       "type": 8,
       "value": "a"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "sub-breeds": [
     {
       "type": 0,
       "value": "Unterrasse"
+    }
+  ],
+  "title": [
+    {
+      "type": 0,
+      "value": "Hunde Informationen"
     }
   ]
 }
