@@ -8,10 +8,14 @@ import Toasts from './features/toast/Toasts'
 import './App.scss';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import { Helmet } from 'react-helmet';
+import { useIntl } from 'react-intl';
 
 function App() {
   const { listen } = useHistory();
   let { path } = useRouteMatch();
+
+  let intl = useIntl();
 
   useEffect(
     () =>
@@ -22,11 +26,13 @@ function App() {
       }),
     [listen]
   );
+  let titleTranslated = intl.formatMessage({ id:"title", defaultMessage:"Dog Info" });
 
   return (
     <>
       <Navbar></Navbar>
       <Toasts></Toasts>
+      <Helmet title={titleTranslated} />
       <Switch>
         <Route exact path={`${path}/`} component={Home} />
         <Route exact path={`${path}/breeds`} component={Breeds} />

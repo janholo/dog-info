@@ -94,7 +94,7 @@ export function Navbar() {
                         <div className="navbar-dropdown">
                             {Object.keys(LocalisationData).map((locale, i) => {
                                 // replace locale (javascript replace only replaces first occurence)
-                                let switchLangUrl = window.location.pathname.replace(`/${intlData.locale}`, `/${locale}`);
+                                let switchLangUrl = window.location.pathname.replace(`${process.env.PUBLIC_URL}/${intlData.locale}`, `/${locale}`);
                                 if(locale !== intlData.locale) {
                                     return (
                                         <Link to={switchLangUrl} key={i} className="navbar-item" onClick={() => closeBurgerMenu()}>

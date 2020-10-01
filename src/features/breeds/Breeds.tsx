@@ -2,13 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectBreeds } from '../breeds/breedsSlice';
 import LocalisedLink from '../LocalisedLink';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import {Helmet} from "react-helmet";
 
 export function Breeds() {
     const breeds = useSelector(selectBreeds);
+    const intl = useIntl();
 
     if (Object.keys(breeds).length === 0) {
-        return NoBreedsFound();
+        return NoBreedsFound(intl);
     }
 
     let breedBoxes = Object.keys(breeds).map((u, i) => {
@@ -28,8 +30,12 @@ export function Breeds() {
             </div>);
     });
 
+    let breedsTranslated = intl.formatMessage({ id:"breeds", defaultMessage:"Breeds" });
+    let titleTranslated = intl.formatMessage({ id:"title", defaultMessage:"Dog Info" });
+
     return (
         <>
+            <Helmet title={`${titleTranslated} - ${breedsTranslated}`} />
             <section className="section">
                 <div className="container">
                     <h1 className="title">
@@ -55,9 +61,12 @@ export function Breeds() {
     );
 }
 
-function NoBreedsFound() {
+function NoBreedsFound(intl: IntlShape) {
+    let breedsTranslated = intl.formatMessage({ id:"breeds", defaultMessage:"Breeds" });
+    let titleTranslated = intl.formatMessage({ id:"title", defaultMessage:"Dog Info" });
     return (
         <section className="section">
+            <Helmet title={`${titleTranslated} - ${breedsTranslated}`} />
             <div className="container">
                 <h1 className="title">
                     <FormattedMessage

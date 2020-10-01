@@ -35,7 +35,7 @@ export function LocalisedApp(props: ILocalisedAppProps) {
         if(props.locale !== "en") {
             setMessages({messages: undefined, state: State.Loading, locale: props.locale});
 
-            fetch(`/compiled-lang/${props.locale}.json`)
+            fetch(`${process.env.PUBLIC_URL}/compiled-lang/${props.locale}.json`)
                 .then(r => r.json())
                 .then(json => {
                     setMessages({messages: json, state: State.Ok, locale: props.locale});

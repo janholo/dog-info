@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadAdditionalData, selectBreeds, Breed } from '../breeds/breedsSlice';
 import { ModalImage } from '../modal-image/ModalImage'
 import LocalisedLink from '../LocalisedLink';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 export function BreedDetail() {
     let { breed, subbreed } = useParams();
     let { path, url } = useRouteMatch();
+
+    let intl = useIntl();
 
     let breedName: string = breed;
     let subBreedName: string = subbreed;
@@ -128,9 +131,11 @@ export function BreedDetail() {
             </div>);
     });
 
+    let titleTranslated = intl.formatMessage({ id:"title", defaultMessage:"Dog Info" });
 
     return (
         <>
+            <Helmet title={`${titleTranslated} - ${breedObject.name}`} />
             <div className="section">
                 <div className="container">
                     <h1 className="title is-3">{breedObject.name}</h1>
